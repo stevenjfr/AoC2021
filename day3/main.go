@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -27,91 +28,91 @@ func readLines(path string) ([]string, error) {
 	return lines, scanner.Err()
 }
 
-// func code1() {
+func code1() {
 
-// 	lines, err := readLines("input.txt")
-// 	if err != nil {
-// 		log.Fatalf("readLines: %s", err)
-// 	}
+	lines, err := readLines("input.txt")
+	if err != nil {
+		log.Fatalf("readLines: %s", err)
+	}
 
-// 	var slices [5][12]int
-// 	var remaining [12][5]int
+	var slices [5][12]int
+	var remaining [12][5]int
 
-// 	for i, line := range lines {
-// 		binary := strings.Split(line, "")
+	for i, line := range lines {
+		binary := strings.Split(line, "")
 
-// 		for v, number := range binary {
-// 			num, _ := strconv.Atoi(number)
-// 			slices[v][i] = num
-// 			remaining[i][v] = num
-// 		}
+		for v, number := range binary {
+			num, _ := strconv.Atoi(number)
+			slices[v][i] = num
+			remaining[i][v] = num
+		}
 
-// 	}
+	}
 
-// 	var final []int
-// 	for _, bitstream := range slices {
+	var final []int
+	for _, bitstream := range slices {
 
-// 		var oneCount int
-// 		var zeroCount int
-// 		for _, bit := range bitstream {
+		var oneCount int
+		var zeroCount int
+		for _, bit := range bitstream {
 
-// 			if bit > 0 {
-// 				oneCount++
-// 			} else {
-// 				zeroCount++
-// 			}
-// 		}
-// 		if oneCount > zeroCount {
-// 			final = append(final, 1)
-// 		} else {
-// 			final = append(final, 0)
-// 		}
+			if bit > 0 {
+				oneCount++
+			} else {
+				zeroCount++
+			}
+		}
+		if oneCount > zeroCount {
+			final = append(final, 1)
+		} else {
+			final = append(final, 0)
+		}
 
-// 	}
+	}
 
-// 	var gamma = strings.Trim(strings.Join(strings.Split(fmt.Sprint(final), " "), ""), "[]")
-// 	i, _ := strconv.ParseInt(gamma, 2, 64)
-// 	fmt.Println(i)
-// 	//var gammagammaDecimal = i
+	var gamma = strings.Trim(strings.Join(strings.Split(fmt.Sprint(final), " "), ""), "[]")
+	i, _ := strconv.ParseInt(gamma, 2, 64)
+	fmt.Println(i)
+	//var gammagammaDecimal = i
 
-// 	var finalreverse []int
-// 	for i := len(slices) - 1; i >= 0; i-- {
-// 		//	println(i)
-// 		bitstream := slices[i]
-// 		//for _, bitstream := range slices {
+	var finalreverse []int
+	for i := len(slices) - 1; i >= 0; i-- {
+		//	println(i)
+		bitstream := slices[i]
+		//for _, bitstream := range slices {
 
-// 		var oneCount int
-// 		var zeroCount int
-// 		for _, bit := range bitstream {
+		var oneCount int
+		var zeroCount int
+		for _, bit := range bitstream {
 
-// 			if bit > 0 {
-// 				oneCount++
-// 			} else {
-// 				zeroCount++
-// 			}
-// 		}
-// 		if oneCount < zeroCount {
-// 			finalreverse = prependInt(finalreverse, 1)
-// 		} else {
-// 			finalreverse = prependInt(finalreverse, 0)
-// 		}
+			if bit > 0 {
+				oneCount++
+			} else {
+				zeroCount++
+			}
+		}
+		if oneCount < zeroCount {
+			finalreverse = prependInt(finalreverse, 1)
+		} else {
+			finalreverse = prependInt(finalreverse, 0)
+		}
 
-// 	}
-// 	//fmt.Println(finalreverse)
-// 	var epsilon = strings.Trim(strings.Join(strings.Split(fmt.Sprint(finalreverse), " "), ""), "[]")
-// 	e, _ := strconv.ParseInt(epsilon, 2, 64)
+	}
+	//fmt.Println(finalreverse)
+	var epsilon = strings.Trim(strings.Join(strings.Split(fmt.Sprint(finalreverse), " "), ""), "[]")
+	e, _ := strconv.ParseInt(epsilon, 2, 64)
 
-// 	var total = i * e
-// 	fmt.Println(total)
+	var total = i * e
+	fmt.Println(total)
 
-// }
+}
 
-// func prependInt(x []int, y int) []int {
-// 	x = append(x, 0)
-// 	copy(x[1:], x)
-// 	x[0] = y
-// 	return x
-// }
+func prependInt(x []int, y int) []int {
+	x = append(x, 0)
+	copy(x[1:], x)
+	x[0] = y
+	return x
+}
 
 func pruneRemaining(input [][]int, keep int, position int) [][]int {
 	var remaining [][]int
